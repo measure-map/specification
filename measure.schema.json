@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json",
+  "title": "Measure",
+  "description": "A single measure (UK: bar) or measure-like unit of a music score.",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "type": "string",
+      "description": "Any unique string to identify this object.",
+      "examples": [
+        "1",
+        "m20",
+        "https://dme.mozarteum.at/movi/navigator/155/001/01/20/nma"
+      ]
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "A simple count of measure units in the described source, using natural numbers starting with 1."
+    },
+    "qstamp": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The symbolic time to have elapsed since the start of the source, measured in quarter notes.",
+      "examples": [
+        0.0,
+        16.5,
+        20.66667
+      ]
+    },
+    "number": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "A number assigned to this measure, which typically follows musical convention, for instance starting with natural numbers (1, 2, 3...), except in the case of anacruses which start instead on (0, 1, 2...)."
+    },
+    "name": {
+      "type": "string",
+      "description": "A label for the measure. Typically used for distinguishing between measures with the same number (as in '16a', '16b', '16c') or rehearsal marks.",
+      "examples": [
+        "1",
+        "16a",
+        "H"
+      ]
+    },
+    "time_signature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A label for the time signature. Typically this takes the form of `<int>/<int>' but can be an arbitrary string as long or 'null' as long as actual_length is specified.",
+      "examples": [
+        "3/8",
+        "C",
+        null
+      ]
+    },
+    "nominal_length": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "The default duration that corresponds to the given 'time_signature', in quarter notes.",
+      "examples": [
+        1.5,
+        4,
+        6.0,
+        null
+      ]
+    },
+    "actual_length": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The actual duration of the measure, in quarter notes.",
+        "examples": [
+            0.25,
+            4,
+            6.0
+        ]
+    },
+    "start_repeat": {
+      "type": [
+        "boolean",
+        "number"
+      ],
+      "default": false,
+      "description": "Typical usage is with the bool type, with 'true' indicating a start repeat at the beginning of the measure."
+    },
+    "end_repeat": {
+      "type": [
+        "boolean",
+        "number"
+      ],
+      "default": false,
+      "description": "Typical usage is with the bool type, with 'true' indicating an end repeat at the end of the measure."
+    },
+    "next": {
+      "type": "array",
+      "items": [
+        {
+          "type": ["string", "integer"]
+        }
+      ],
+      "description": "The 'ID' strings or 'count' integers that correspond to all measures that can follow this one. The corresponding field needs to be present in the MeasureMap."
+    }
+  },
+  "anyOf": [
+    {
+      "properties": {
+        "next": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ],
+          "description": "The IDs that correspond to all measures that can follow this one."
+        }
+      },
+      "required": [
+        "ID"
+      ]
+    },
+    {
+      "properties": {
+        "next": {
+          "type": "array",
+          "items": [
+            {
+              "type": "integer"
+            }
+          ],
+          "description": "The counts that correspond to all measures that can follow this one."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    }
+  ],
+  "additionalProperties": false
+}
