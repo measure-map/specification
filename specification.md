@@ -1,10 +1,8 @@
 # MeasureMap Specification
 
-## Introduction
-
 ## Specification
 
-The specification is currently defined in the form of the following things:
+The MeasureMap specification is currently defined in the form of the following things:
 
 1. `measure.schema.json`: a [JSON Schema](https://json-schema.org/) describing a single entry of a MeasureMap, here 
    called a `Measure` object.
