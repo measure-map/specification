@@ -122,6 +122,7 @@ Type: `array`
 
 <b id="httpsraw.githubusercontent.commeasure-mapspecificationmainmeasuremap.schema.json">&#36;id: https://raw.githubusercontent.com/measure-map/specification/main/measuremap.schema.json</b>
 
+Item Count:  &ge; 2
  - **_Items_**
  - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measuremap.schema.json/items">path: #https://raw.githubusercontent.com/measure-map/specification/main/measuremap.schema.json/items</i>
  - &#36;ref: [measure.schema.json](#measure.schema.json)
