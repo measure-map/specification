@@ -13,7 +13,7 @@ The MeasureMap specification is currently defined in the form of the following t
 The following documentation was generated directly from the `schema.json` files using the online tool 
 [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/).
 
-### Measure
+# Measure
 
 _A single measure (UK: bar) or measure-like unit of a music score._
 
@@ -30,20 +30,21 @@ This schema <u>does not</u> accept additional properties.
 **_Properties_**
 
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/ID">ID</b>
-	 - _Any unique string to identify this object._
+	 - _Any unique string to identify this Measure object. Unique, here, means that the string cannot be used as ID for another object that forms part of the same MeasureMap. The 'next' array may use these IDs to refer to other Measures. Additionally, IDs can prove useful in cross-relating between MeasureMaps relating to different editions of the same piece, e.g. by assigning identical IDs for measures that are identical across the two. The ID could be, for instance, human-readable form (e.g., the 'count' value converted to a string) or a random string (often the case in MEI scores)._
 	 - Type: `string`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/ID">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/ID</i>
 	 - Example values: 
 		 1. _"1"_
 		 2. _"m20"_
-		 3. _"https://dme.mozarteum.at/movi/navigator/155/001/01/20/nma"_
+		 3. _"var1bar6qs234"_
+		 4. _"https://dme.mozarteum.at/movi/navigator/155/001/01/20/nma"_
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/count">count</b>
-	 - _A simple count of measure units in the described source, using natural numbers starting with 1._
+	 - _Position of this Measure object in the MeasureMap, using natural numbers starting with 1. This serves primarily as an index, and does not attempt detailed musical conventions. In the simplest case (e.g., a score with no anacrusis or other irregularities) this count matches the (most musical) number field below._
 	 - Type: `integer`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/count">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/count</i>
 	 - Range:  &ge; 1
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/qstamp">qstamp</b>
-	 - _The symbolic time to have elapsed since the start of the source, measured in quarter notes._
+	 - _The symbolic time to have elapsed since the beginning of the source, measured in quarter notes._
 	 - Type: `number`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/qstamp">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/qstamp</i>
 	 - Example values: 
@@ -52,28 +53,28 @@ This schema <u>does not</u> accept additional properties.
 		 3. `20.66667`
 	 - Range:  &ge; 0
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/number">number</b>
-	 - _A number assigned to this measure, which typically follows musical convention, for instance starting with natural numbers (1, 2, 3...), except in the case of anacruses which start instead on (0, 1, 2...)._
+	 - _A number assigned to this measure based on a given set of rules or conventions. One wide-spread convention, for instance, is that a piece starts with measure number 0 if it has an anacrusis and with number 1 otherwise._
 	 - Type: `integer`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/number">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/number</i>
 	 - Range:  &ge; 0
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/name">name</b>
-	 - _A label for the measure. Typically used for distinguishing between measures with the same number (as in '16a', '16b', '16c') or rehearsal marks._
+	 - _A label for the Measure. Typically used for distinguishing between Measures with the same number, e.g. for first and second endings (as in '16a', '16b') or split logical measures (as in '16-1', '16-2')._
 	 - Type: `string`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/name">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/name</i>
 	 - Example values: 
 		 1. _"1"_
 		 2. _"16a"_
-		 3. _"H"_
+		 3. _"28-1"_
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature">time_signature</b>
-	 - _A label for the time signature. Typically this takes the form of `<int>/<int>' but can be an arbitrary string as long or 'null' as long as actual_length is specified._
-	 - Types: `string`, `null`
+	 - _A label for the time signature. Typically this takes the form <int>/<int>, as in ‘3/8’, but can be any text (e.g., ‘C’, ‘common time’, ‘unmeasured’ ‘cadenza’) as long as actual_length is specified._
+	 - Type: `string`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature</i>
 	 - Example values: 
 		 1. _"3/8"_
 		 2. _"C"_
-		 3. `null`
+		 3. _"cadenza"_
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/nominal_length">nominal_length</b>
-	 - _The default duration that corresponds to the given 'time_signature', in quarter notes._
+	 - _The default duration that corresponds to the given 'time_signature', in quarter notes. Can be derived from 'time_signature' if it takes the form of an '<int>/<int>'-encoded fraction. Can take the value 'null' if the time signature has no corresponding duration (e.g. 'cadenza')._
 	 - Types: `number`, `null`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/nominal_length">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/nominal_length</i>
 	 - Example values: 
