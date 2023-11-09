@@ -7,22 +7,23 @@
   "properties": {
     "ID": {
       "type": "string",
-      "description": "Any unique string to identify this object.",
+      "description": "Any unique string to identify this Measure object. Unique, here, means that the string cannot be used as ID for another object that forms part of the same MeasureMap. The 'next' array may use these IDs to refer to other Measures. Additionally, IDs can prove useful in cross-relating between MeasureMaps relating to different editions of the same piece, e.g. by assigning identical IDs for measures that are identical across the two. The ID could be, for instance, human-readable form (e.g., the 'count' value converted to a string) or a random string (often the case in MEI scores).",
       "examples": [
         "1",
         "m20",
+        "var1bar6qs234",
         "https://dme.mozarteum.at/movi/navigator/155/001/01/20/nma"
       ]
     },
     "count": {
       "type": "integer",
       "minimum": 1,
-      "description": "A simple count of measure units in the described source, using natural numbers starting with 1."
+      "description": "Position of this Measure object in the MeasureMap, using natural numbers starting with 1. This serves primarily as an index, and does not attempt detailed musical conventions. In the simplest case (e.g., a score with no anacrusis or other irregularities) this count matches the (most musical) number field below."
     },
     "qstamp": {
       "type": "number",
       "minimum": 0,
-      "description": "The symbolic time to have elapsed since the start of the source, measured in quarter notes.",
+      "description": "The symbolic time to have elapsed since the beginning of the source, measured in quarter notes.",
       "examples": [
         0.0,
         16.5,
@@ -32,33 +33,30 @@
     "number": {
       "type": "integer",
       "minimum": 0,
-      "description": "A number assigned to this measure, which typically follows musical convention, for instance starting with natural numbers (1, 2, 3...), except in the case of anacruses which start instead on (0, 1, 2...)."
+      "description": "A number assigned to this measure based on a given set of rules or conventions. One wide-spread convention, for instance, is that a piece starts with measure number 0 if it has an anacrusis and with number 1 otherwise."
     },
     "name": {
       "type": "string",
-      "description": "A label for the measure. Typically used for distinguishing between measures with the same number (as in '16a', '16b', '16c') or rehearsal marks.",
+      "description": "A label for the Measure. Typically used for distinguishing between Measures with the same number, e.g. for first and second endings (as in '16a', '16b') or split logical measures (as in '16-1', '16-2').",
       "examples": [
         "1",
         "16a",
-        "H"
+        "28-1"
       ]
     },
     "time_signature": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "A label for the time signature. Typically this takes the form of `<int>/<int>' but can be an arbitrary string as long or 'null' as long as actual_length is specified.",
+      "type": "string",
+      "description": "A label for the time signature. Typically this takes the form <int>/<int>, as in ‘3/8’, but can be any text (e.g., ‘C’, ‘common time’, ‘unmeasured’ ‘cadenza’) as long as actual_length is specified.",
       "examples": [
         "3/8",
         "C",
-        null
+        "cadenza"
       ]
     },
     "nominal_length": {
       "type": ["number", "null"],
       "minimum": 0,
-      "description": "The default duration that corresponds to the given 'time_signature', in quarter notes.",
+      "description": "The default duration that corresponds to the given 'time_signature', in quarter notes. Can be derived from 'time_signature' if it takes the form of an '<int>/<int>'-encoded fraction. Can take the value 'null' if the time signature has no corresponding duration (e.g. 'cadenza').",
       "examples": [
         1.5,
         4,
