@@ -90,6 +90,16 @@
       "default": false,
       "description": "Typical usage is with the bool type, with 'true' indicating an end repeat at the end of the measure."
     },
+    "volta": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "The number of the volta (also called ending or 'prima/seconda volta' bracket) that this measure is part of, e.g. 1 for a first ending and 2 for a second ending. Takes the value 'null' if the measure is not part of a volta.",
+      "examples": [
+        1,
+        2,
+        null
+      ]
+    },
     "next": {
       "type": "array",
       "items": {
