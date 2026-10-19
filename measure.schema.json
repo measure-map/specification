@@ -46,7 +46,7 @@
     },
     "time_signature": {
       "type": "string",
-      "description": "A label for the time signature. Typically this takes the form <int>/<int>, as in ‘3/8’, but can be any text (e.g., ‘C’, ‘common time’, ‘unmeasured’ ‘cadenza’) as long as actual_length is specified.",
+      "description": "A label for the time signature. Typically this takes the form <int>/<int>, as in '3/8', but can be any text (e.g., 'C', 'common time', 'unmeasured', 'cadenza') as long as actual_length is specified.",
       "examples": [
         "3/8",
         "C",

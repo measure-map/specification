@@ -66,7 +66,7 @@ This schema <u>does not</u> accept additional properties.
 		 2. _"16a"_
 		 3. _"28-1"_
  - <b id="#https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature">time_signature</b>
-	 - _A label for the time signature. Typically this takes the form <int>/<int>, as in ‘3/8’, but can be any text (e.g., ‘C’, ‘common time’, ‘unmeasured’ ‘cadenza’) as long as actual_length is specified._
+	 - _A label for the time signature. Typically this takes the form <int>/<int>, as in '3/8', but can be any text (e.g., 'C', 'common time', 'unmeasured', 'cadenza') as long as actual_length is specified._
 	 - Type: `string`
 	 - <i id="https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature">path: #https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json/properties/time_signature</i>
 	 - Example values: 
