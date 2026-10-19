@@ -33,7 +33,6 @@ We provide curated measure maps for several corpora. We also align and include t
 ### OpenScore Lieder
 
 - Scores and analyses: https://github.com/MarkGotham/When-in-Rome/tree/master/Corpus/OpenScore-LiederCorpus
-- Measure maps: ??? 
 - Dezrann corpus: http://dezrann.net/explore/openscore-lieder
 
 ### Mozart Piano Sonatas
