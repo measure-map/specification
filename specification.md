@@ -13,7 +13,7 @@ The MeasureMap specification is currently defined in the form of the following t
 The following documentation was generated directly from the `schema.json` files using the online tool 
 [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/).
 
-# Measure
+### Measure
 
 _A single measure (UK: bar) or measure-like unit of a music score._
 
