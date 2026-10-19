@@ -17,9 +17,9 @@ The MM codes provide functionality for:
 - integrating MMs into the Dezrann workflow:
 https://gitlab.com/algomus.fr/dezrann/dezrann-corpus
 
-- compression / expansion of MMs
-- diagnosis of differences between two MMs, yielding human- and machine-readable instructions for adjusting one to fit
-- implementation of the diagnosis instructions to make in-place changes on one score to align and fit with another (currently music21-application only)
+- compression / expansion of MMs: https://github.com/measure-map/pyMeasureMap
+- diagnosis of differences between two MMs, yielding human- and machine-readable instructions for adjusting one to fit: https://github.com/measure-map/pyMeasureMap
+- implementation of the diagnosis instructions to make in-place changes on one score to align and fit with another (currently music21-application only): https://github.com/MarkGotham/bar-measure
 
 
 ## Corpus-wide examples
