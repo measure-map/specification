@@ -37,6 +37,41 @@ When squash-merging, the pull request title becomes the commit message, so it mu
 
 On `main`, `version.txt` and both `$id`s hold the version of the latest release. release-please keeps a release pull request open that bumps `version.txt` and adds the changelog entry. The release workflow then updates the `$id`s and `specification.md` in the same pull request and runs the tests. Merging that pull request tags the release, creates the GitHub Release, and publishes all released versions to GitHub Pages.
 
+## File names and editor support
+
+MeasureMap files use the suffix `.mm.json`, e.g. `317.mm.json`. pyMeasureMap writes this suffix by default.
+
+The schema is registered in the [JSON Schema Store](https://www.schemastore.org/) (entry "MeasureMap" in [`src/api/json/catalog.json`](https://github.com/SchemaStore/schemastore/blob/master/src/api/json/catalog.json), added in [SchemaStore/schemastore#6527](https://github.com/SchemaStore/schemastore/pull/6527)). Editors and language servers that use the Store's catalog therefore validate and autocomplete `*.mm.json` files without further configuration. The entry's `url` points to `schema/latest/measuremap.schema.json`, so editors pick up every new release automatically.
+
+### Updating the SchemaStore entry after a release
+
+The entry also lists every release under `versions`. After each release, add the new version there with a pull request to [SchemaStore/schemastore](https://github.com/SchemaStore/schemastore). The example below is for 1.1.0, using a clone of a personal fork with `upstream` pointing to SchemaStore:
+
+1. Start a branch from the current upstream catalog:
+   ```bash
+   git fetch upstream
+   ```
+   ```bash
+   git switch -c measuremap-1.1.0 upstream/master
+   ```
+2. In `src/api/json/catalog.json`, find the entry with `"name": "MeasureMap"` and add a line to `versions`:
+   ```json
+   "1.1.0": "https://measure-map.github.io/specification/schema/1.1.0/measuremap.schema.json"
+   ```
+   Leave `url` unchanged.
+3. Commit, push to the fork, and open the pull request:
+   ```bash
+   git commit -am "Add MeasureMap 1.1.0 to the catalog"
+   ```
+   ```bash
+   git push -u origin measuremap-1.1.0
+   ```
+   ```bash
+   gh pr create --repo SchemaStore/schemastore --base master --title "Add MeasureMap 1.1.0 to the catalog" --body "Lists the new MeasureMap release in versions."
+   ```
+
+Change `fileMatch` or `url` only if the file name convention or the publishing location changes.
+
 ## License
 
 The specification is licensed under the [MIT License](LICENSE).
