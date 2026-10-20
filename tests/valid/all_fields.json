@@ -1,0 +1,42 @@
+[
+  {
+    "ID": "0",
+    "count": 1,
+    "qstamp": 0,
+    "number": 0,
+    "name": "0",
+    "time_signature": "3/4",
+    "nominal_length": 3,
+    "actual_length": 1,
+    "start_repeat": true,
+    "end_repeat": false,
+    "next": [
+      "1"
+    ]
+  },
+  {
+    "ID": "1",
+    "count": 2,
+    "qstamp": 1,
+    "number": 1,
+    "name": "1",
+    "time_signature": "3/4",
+    "nominal_length": 3.0,
+    "actual_length": 3,
+    "end_repeat": true,
+    "next": [
+      "0",
+      "2"
+    ]
+  },
+  {
+    "ID": "2",
+    "count": 3,
+    "qstamp": 4,
+    "number": 2,
+    "name": "2",
+    "time_signature": "cadenza",
+    "nominal_length": null,
+    "actual_length": 20.66667
+  }
+]

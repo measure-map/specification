@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/measure-map/specification/main/measure.schema.json",
+  "$id": "https://measure-map.github.io/specification/schema/1.0.0/measure.schema.json",
   "title": "Measure",
   "description": "A single measure (UK: bar) or measure-like unit of a music score.",
   "type": "object",

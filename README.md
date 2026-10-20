@@ -4,9 +4,32 @@ Aligning versions of the same source material has been a persistent challenge in
 
 ## Reference
 
-Mark Gotham et al., The ‘Measure Map’: an inter-operable standard for aligning symbolic music, International Conference on Digital Libraries for Musicology (DLfM 2023), 91-99, https://doi.org/10.1145/3625135.3625136
+[Gotham, M.](https://github.com/MarkGotham), [Hentschel, J.](https://github.com/johentsch), [Couturier, L.](https://github.com/pythouille), Dykeaylen, N., Rohrmeier, M., & [Giraud, M.](https://github.com/magiraud) (2023). The ‘Measure Map’: An inter-operable standard for aligning symbolic music. *Proceedings of the 10th International Conference on Digital Libraries for Musicology*, 91–99. https://doi.org/10.1145/3625135.3625136
 
 Formal specification: https://github.com/measure-map/specification/blob/main/specification.md
+
+## Versioning
+
+The schemas follow [Semantic Versioning](https://semver.org/), applied to the MeasureMaps they accept:
+
+- **MAJOR**: a MeasureMap that was valid becomes invalid, or a field changes its meaning.
+- **MINOR**: a backwards-compatible addition, e.g. a new optional field. Every MeasureMap that was valid stays valid. Because the schemas do not accept additional properties, a MeasureMap that uses the addition is rejected by earlier versions.
+- **PATCH**: changes to descriptions, examples, or documentation that leave the set of valid MeasureMaps unchanged, and bug fixes that make a schema enforce what its documentation already states.
+
+Every release is published under a fixed URL that never changes, and that URL is the schema's `$id`:
+
+- `https://measure-map.github.io/specification/schema/<version>/measure.schema.json`
+- `https://measure-map.github.io/specification/schema/<version>/measuremap.schema.json`
+
+`schema/latest/` holds a copy of the most recent release for convenience; do not use it as an identifier. Changes are listed in [CHANGELOG.md](CHANGELOG.md).
+
+### Releasing
+
+On `main`, the version in both `$id`s is the one that will be released next. A pull request that changes a schema bumps it as required (unless an earlier change since the last release already did) and adds an entry under `[Unreleased]` in the changelog. To release, rename `[Unreleased]` to `[<version>] - <date>`, merge, and push the tag `v<version>`. The release workflow checks that the tag matches the `$id`s, publishes all released versions to GitHub Pages, and creates a GitHub Release from the changelog entry.
+
+## License
+
+The specification is licensed under the [MIT License](LICENSE).
 
 ## Codes
 
