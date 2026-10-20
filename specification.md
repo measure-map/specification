@@ -105,14 +105,21 @@ This schema <u>does not</u> accept additional properties.
 	 - <i id="https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/end_repeat">path: #https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/end_repeat</i>
 	 - Default: _false_
  - <b id="#https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/volta">volta</b>
-	 - _The number of the volta (also called ending or 'prima/seconda volta' bracket) that this measure is part of, e.g. 1 for a first ending and 2 for a second ending. Takes the value 'null' if the measure is not part of a volta._
-	 - Types: `integer`, `null`
+	 - _The number of the volta (also called ending or 'prima/seconda volta' bracket) that this measure is part of, e.g. 1 for a first ending and 2 for a second ending. If the bracket applies to several passes, as in '1., 2.' or '1.-3.', the value is the array of all pass numbers in ascending order, e.g. [1, 2] or [1, 2, 3]. Takes the value 'null' if the measure is not part of a volta._
+	 - Types: `integer`, `array`, `null`
 	 - <i id="https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/volta">path: #https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/volta</i>
 	 - Example values: 
 		 1. `1`
 		 2. `2`
-		 3. `null`
+		 3. `1,2`
+		 4. `1,2,3`
+		 5. `null`
 	 - Range:  &ge; 1
+	 - Item Count:  &ge; 1
+		 - **_Items_**
+		 - Type: `integer`
+		 - <i id="https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/volta/items">path: #https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/volta/items</i>
+		 - Range:  &ge; 1
  - <b id="#https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json/properties/next">next</b>
 	 - _The 'ID' strings or 'count' integers that correspond to all measures that can follow this one. The corresponding field needs to be present in the MeasureMap._
 	 - Type: `array`
