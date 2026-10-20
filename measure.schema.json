@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://measure-map.github.io/specification/schema/1.0.0/measure.schema.json",
+  "$id": "https://measure-map.github.io/specification/schema/1.0.1/measure.schema.json",
   "title": "Measure",
   "description": "A single measure (UK: bar) or measure-like unit of a music score.",
   "type": "object",
@@ -92,11 +92,9 @@
     },
     "next": {
       "type": "array",
-      "items": [
-        {
-          "type": ["string", "integer"]
-        }
-      ],
+      "items": {
+        "type": ["string", "integer"]
+      },
       "description": "The 'ID' strings or 'count' integers that correspond to all measures that can follow this one. The corresponding field needs to be present in the MeasureMap."
     }
   },
@@ -105,11 +103,9 @@
       "properties": {
         "next": {
           "type": "array",
-          "items": [
-            {
-              "type": "string"
-            }
-          ],
+          "items": {
+            "type": "string"
+          },
           "description": "The IDs that correspond to all measures that can follow this one."
         }
       },
@@ -121,11 +117,9 @@
       "properties": {
         "next": {
           "type": "array",
-          "items": [
-            {
-              "type": "integer"
-            }
-          ],
+          "items": {
+            "type": "integer"
+          },
           "description": "The counts that correspond to all measures that can follow this one."
         }
       },

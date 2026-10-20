@@ -1,13 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://measure-map.github.io/specification/schema/1.0.0/measuremap.schema.json",
+  "$id": "https://measure-map.github.io/specification/schema/1.0.1/measuremap.schema.json",
   "title": "MeasureMap",
   "description": "An array of Measure objects that represents the measure (bar) units of a music score.",
   "type": "array",
-  "items": [
-    {
-        "$ref" : "measure.schema.json"
-    }
-  ],
+  "items": {
+    "$ref": "measure.schema.json"
+  },
   "minItems": 2
 }
