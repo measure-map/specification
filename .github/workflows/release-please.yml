@@ -1,0 +1,104 @@
+name: Release
+
+# On every push to main, release-please opens or updates the release pull request. This workflow
+# then brings the $ids and specification.md in that pull request in line with the proposed version.
+# Merging the release pull request makes release-please tag the release and create the GitHub
+# Release, after which all released schema versions are published to GitHub Pages. Running the
+# workflow manually republishes the Pages site.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - id: release
+        uses: googleapis/release-please-action@v5
+
+      # Pull requests and pushes made with GITHUB_TOKEN do not trigger CI, so the release pull
+      # request is updated and tested here.
+      - if: steps.release.outputs.pr
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+      - if: steps.release.outputs.pr
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - if: steps.release.outputs.pr
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Update the $ids and specification.md to the proposed version
+        if: steps.release.outputs.pr
+        run: |
+          npm ci
+          npm run version:apply
+          pip install -r tests/requirements.txt
+          pytest tests
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "chore: set the schema \$ids to version $(cat version.txt)"
+            git push
+          fi
+
+  pages:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build the site from all release tags
+        run: |
+          mkdir -p site/schema
+          touch site/.nojekyll
+          latest=""
+          items=""
+          for tag in $(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=v:refname); do
+            version="${tag#v}"
+            mkdir -p "site/schema/$version"
+            for file in measure.schema.json measuremap.schema.json; do
+              git show "$tag:$file" > "site/schema/$version/$file"
+            done
+            latest="$version"
+            items="<li><a href=\"schema/$version/measuremap.schema.json\">$version</a></li>$items"
+          done
+          [ -n "$latest" ] || { echo "::error::no release tags found"; exit 1; }
+          cp -r "site/schema/$latest" site/schema/latest
+          cat > site/index.html <<HTML
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>MeasureMap schemas</title>
+          <h1>MeasureMap schemas</h1>
+          <p>Specification: <a href="https://github.com/measure-map/specification">measure-map/specification</a>.
+          Latest release: <a href="schema/latest/measuremap.schema.json">$latest</a>.</p>
+          <ul>$items</ul>
+          HTML
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

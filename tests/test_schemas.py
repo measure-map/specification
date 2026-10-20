@@ -49,6 +49,13 @@ def test_ids_name_their_file_and_share_one_version():
     assert len(versions) == 1, f"schemas disagree on their version: {sorted(versions)}"
 
 
+def test_ids_match_the_release_version():
+    version = (ROOT / "version.txt").read_text(encoding="utf-8").strip()
+    assert load(ROOT / ".release-please-manifest.json") == {".": version}
+    for name, schema in SCHEMAS.items():
+        assert ID_PATTERN.fullmatch(schema["$id"]).group(1) == version, name
+
+
 @pytest.mark.parametrize("path", fixtures("valid"), ids=lambda p: p.stem)
 def test_valid(path):
     errors = [error.message for error in VALIDATOR.iter_errors(load(path))]
