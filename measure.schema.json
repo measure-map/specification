@@ -99,6 +99,7 @@
       },
       "minItems": 1,
       "uniqueItems": true,
+      "default": null,
       "description": "The number of the volta (also called ending or 'prima/seconda volta' bracket) that this measure is part of, e.g. 1 for a first ending and 2 for a second ending. If the bracket applies to several passes, as in '1., 2.' or '1.-3.', the value is the array of all pass numbers in ascending order, e.g. [1, 2] or [1, 2, 3]. Takes the value 'null' if the measure is not part of a volta.",
       "examples": [
         1,
