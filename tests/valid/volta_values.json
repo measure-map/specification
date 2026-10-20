@@ -1,0 +1,32 @@
+[
+  {
+    "count": 1
+  },
+  {
+    "count": 2,
+    "volta": 1
+  },
+  {
+    "count": 3,
+    "volta": 2
+  },
+  {
+    "count": 4,
+    "volta": [
+      1,
+      2
+    ]
+  },
+  {
+    "count": 5,
+    "volta": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "count": 6,
+    "volta": null
+  }
+]
