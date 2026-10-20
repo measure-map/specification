@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "description": "Tooling for the MeasureMap specification",
+  "scripts": {
+    "build:spec": "node scripts/build_spec.js"
+  },
+  "devDependencies": {
+    "json-schema-md-doc": "1.0.0"
+  }
+}
