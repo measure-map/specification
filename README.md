@@ -4,7 +4,7 @@ Aligning versions of the same source material has been a persistent challenge in
 
 ## Reference
 
-Mark Gotham et al., The ‘Measure Map’: an inter-operable standard for aligning symbolic music, International Conference on Digital Libraries for Musicology (DLfM 2023), 91-99, https://doi.org/10.1145/3625135.3625136
+[Gotham, M.](https://github.com/MarkGotham), [Hentschel, J.](https://github.com/johentsch), [Couturier, L.](https://github.com/pythouille), Dykeaylen, N., Rohrmeier, M., & [Giraud, M.](https://github.com/magiraud) (2023). The ‘Measure Map’: An inter-operable standard for aligning symbolic music. *Proceedings of the 10th International Conference on Digital Libraries for Musicology*, 91–99. https://doi.org/10.1145/3625135.3625136
 
 Formal specification: https://github.com/measure-map/specification/blob/main/specification.md
 
