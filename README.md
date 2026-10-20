@@ -27,7 +27,15 @@ Every release is published under a fixed URL that never changes, and that URL is
 
 ### Releasing
 
-On `main`, the version in both `$id`s is the one that will be released next. A pull request that changes a schema bumps it as required (unless an earlier change since the last release already did) and adds an entry under `[Unreleased]` in the changelog. To release, rename `[Unreleased]` to `[<version>] - <date>`, merge, and push the tag `v<version>`. The release workflow checks that the tag matches the `$id`s, publishes all released versions to GitHub Pages, and creates a GitHub Release from the changelog entry.
+Releases are automated with [release-please](https://github.com/googleapis/release-please). It reads the [Conventional Commits](https://www.conventionalcommits.org/) on `main` to work out the next version:
+
+- `fix:` gives a PATCH release and `feat:` a MINOR release.
+- A `!` after the type (`feat!:`, `fix!:`) or a `BREAKING CHANGE:` footer gives a MAJOR release. Use it for every change that makes a valid MeasureMap invalid, except the bug fixes covered by PATCH.
+- Other types (`docs:`, `test:`, `ci:`, `chore:`, …) do not trigger a release.
+
+When squash-merging, the pull request title becomes the commit message, so it must follow the same format.
+
+On `main`, `version.txt` and both `$id`s hold the version of the latest release. release-please keeps a release pull request open that bumps `version.txt` and adds the changelog entry. The release workflow then updates the `$id`s and `specification.md` in the same pull request and runs the tests. Merging that pull request tags the release, creates the GitHub Release, and publishes all released versions to GitHub Pages.
 
 ## License
 
