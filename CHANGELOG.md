@@ -4,6 +4,10 @@ All notable changes to the MeasureMap schemas are documented in this file. The f
 
 ## [Unreleased]
 
+### Fixed
+
+- Every Measure of a MeasureMap and every entry of `next` is now validated. Previously, `items` was given in tuple form, so only the first element was checked. MeasureMaps that were wrongly accepted are now rejected.
+
 ## [1.0.0] - 2026-10-20
 
 First versioned release. Apart from their `$id`s, the schemas are identical to the unversioned ones previously on `main`.

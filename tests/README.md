@@ -12,4 +12,5 @@ Each fixture tests one rule, named by its file name. Add a fixture when you add 
 Some cases are less obvious:
 
 - `valid/integer_valued_float.json`: `1.0` counts as an integer. Since draft-06, JSON Schema treats any number with a zero fractional part as an integer.
-- `invalid/next_ids_without_id.json`, `next_counts_without_count.json`: `next` lists only IDs (which requires `ID`) or only counts (which requires `count`).
+- `invalid/invalid_second_measure.json`: an error in a measure after the first is caught. This guards against tuple-form `items`, which validates only the first element.
+- `invalid/next_mixed_types.json`, `next_ids_without_id.json`, `next_counts_without_count.json`: `next` lists only IDs (which requires `ID`) or only counts (which requires `count`).
